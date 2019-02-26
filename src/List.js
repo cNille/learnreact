@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Item from './Item';
+import { connect } from 'react-redux';
+import { toggleItem, addTodo } from './actions';
 
 class List extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      items: [],
       newTodo: '',
     }
   }
@@ -17,17 +18,10 @@ class List extends Component {
     this.setState(newValue);
   }
 
-  // Handle toggling of checkboxes when pressed.
-  toggleCheckBox = (idx) => {
-    const { items } = this.state;
-    items[idx].done = !items[idx].done;
-    this.setState({ items })
-  }
-
   render() {
     // Using deconstructing to getting variables from state-object.
     const { newTodo } = this.state;
-    const { items, name, isDoneList, addTodo, toggleCheckBox} = this.props;
+    const { items, name, isDoneList, addTodo, toggleItem } = this.props;
 
     // Create JSX list of the items
     const list = items.map(item => {
@@ -35,7 +29,7 @@ class List extends Component {
         <Item
           key={`${item.key}`}
           item={item}
-          onPress={() => toggleCheckBox(item.key)}
+          onPress={() => toggleItem(item.key)}
         />
       );
     })
@@ -59,4 +53,16 @@ class List extends Component {
   }
 }
 
-export default List;
+const mapStateToProps = (state) => {
+  return {}
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleItem: idx => dispatch(toggleItem(idx)),
+    addTodo: name => {
+      dispatch(addTodo(name))
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);
