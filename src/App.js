@@ -10,6 +10,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <List name="My Todo List" />
+          <List name="Done Todos" />
         </header>
       </div>
     );
