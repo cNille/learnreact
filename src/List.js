@@ -1,61 +1,68 @@
-import React, { Component } from 'react';
-import Item from './Item';
+import React, { Component } from "react";
+import Item from "./Item";
+import { connect } from "react-redux";
+import { toggleItem, addTodo } from "./actions";
 
 class List extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      items: [],
-      newTodo: '',
-    }
+      newTodo: "",
+    };
   }
 
   // Handle textchange in text-input-field.
   handleTextChange = (event) => {
-    const newValue = { newTodo: event.target.value }
+    const newValue = { newTodo: event.target.value };
     this.setState(newValue);
-  }
-
-  // Handle toggling of checkboxes when pressed.
-  toggleCheckBox = (idx) => {
-    const { moveToDone } = this.props;
-    moveToDone(idx)
-  }
+  };
 
   render() {
     // Using deconstructing to getting variables from state-object.
     const { newTodo } = this.state;
-    const { items, name, isDoneList, addTodo, toggleCheckBox} = this.props;
+    const { items, name, isDoneList, addTodo, toggleItem } = this.props;
 
     // Create JSX list of the items
-    const list = items.map(item => {
+    const list = items.map((item) => {
       return (
         <Item
           key={`${item.key}`}
           item={item}
-          onPress={() => toggleCheckBox(item.key)}
+          onPress={() => toggleItem(item.key)}
         />
       );
-    })
+    });
 
     return (
       <div>
-        <h1>{ name }</h1>
+        <h1>{name}</h1>
         {list}
-        { !isDoneList && (
+        {!isDoneList && (
           <div>
             <input
               type="text"
               value={newTodo}
-              onChange={this.handleTextChange} autoFocus
+              onChange={this.handleTextChange}
+              autoFocus
             />
             <button onClick={() => addTodo(newTodo)}> Add ToDo </button>
           </div>
-        ) }
+        )}
       </div>
     );
   }
 }
 
-export default List;
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleItem: (idx) => dispatch(toggleItem(idx)),
+    addTodo: (name) => {
+      dispatch(addTodo(name));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

@@ -6,6 +6,7 @@ const myStyle={
   }
 }
 
+
 class Item extends Component {
   render (){
     const { onPress, item} = this.props;
