@@ -7,7 +7,6 @@ const myStyle={
 }
 
 class Item extends Component {
-
   render (){
     const { onPress, item} = this.props;
     return (
@@ -23,5 +22,4 @@ class Item extends Component {
     );
   }
 }
-
 export default Item;

@@ -19,9 +19,8 @@ class List extends Component {
 
   // Handle toggling of checkboxes when pressed.
   toggleCheckBox = (idx) => {
-    const { items } = this.state;
-    items[idx].done = !items[idx].done;
-    this.setState({ items })
+    const { moveToDone } = this.props;
+    moveToDone(idx)
   }
 
   // Add a todo to the items-list and reset the newTodo-string

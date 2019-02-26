@@ -10,6 +10,7 @@ class App extends Component {
         <header className="App-header">
           <p className="App-logo">🧐</p>
           <List name="My Todo List" />
+          <List name="Done Todos" />
         </header>
       </div>
     );
