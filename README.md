@@ -1,3 +1,34 @@
+# ReactJS + Redux Course
+
+
+## Step 1: Create-react-app
+
+- Create-react-app helps set up a boilerplate ReactJS app with environment all set.
+- Easy for getting started, but a lot of magic happens!
+    - For e.g, compiling, bundling, webpack, hot-reloading etc...
+
+
+## Step 2: Create an TodoList with callback hell
+
+- Create a List component
+- Create an Item component
+- Use Setstate to create new todos
+
+## Step 3: Create an todo list app with redux
+
+
+## Talk about prototypes
+- Showcase from Other project
+
+## Talk about routing
+- Showcase from Other project
+
+##  Talk about testing (jest)
+- Showcase from Other project
+
+
+# Create-react-app
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
