@@ -19,41 +19,23 @@ class List extends Component {
 
   // Handle toggling of checkboxes when pressed.
   toggleCheckBox = (idx) => {
-    const { moveToDone } = this.props;
-    moveToDone(idx)
-  }
-
-  // Add a todo to the items-list and reset the newTodo-string
-  addTodo = () => {
-    const { newTodo, items} = this.state
-
-    // Validate that newTodo exists
-    if(!newTodo){
-      return
-    }
-
-    // Add new item to the list
-    items.push({
-      name: newTodo,
-      done: false,
-    })
-
-    // Reset newTodo-string, and update the items list.
-    this.setState({ newTodo: '', items })
+    const { items } = this.state;
+    items[idx].done = !items[idx].done;
+    this.setState({ items })
   }
 
   render() {
     // Using deconstructing to getting variables from state-object.
-    const { items,  newTodo } = this.state;
-    const { name } = this.props;
+    const { newTodo } = this.state;
+    const { items, name, isDoneList, addTodo, toggleCheckBox} = this.props;
 
     // Create JSX list of the items
-    const list = items.map((item, idx) => {
+    const list = items.map(item => {
       return (
         <Item
-          key={`${idx}`}
+          key={`${item.key}`}
           item={item}
-          onPress={() => this.toggleCheckBox(idx)}
+          onPress={() => toggleCheckBox(item.key)}
         />
       );
     })
@@ -62,13 +44,16 @@ class List extends Component {
       <div>
         <h1>{ name }</h1>
         {list}
-        <hr />
-        <input
-          type="text"
-          value={newTodo}
-          onChange={this.handleTextChange} autoFocus
-        />
-        <button onClick={this.addTodo}> Add ToDo </button>
+        { !isDoneList && (
+          <div>
+            <input
+              type="text"
+              value={newTodo}
+              onChange={this.handleTextChange} autoFocus
+            />
+            <button onClick={() => addTodo(newTodo)}> Add ToDo </button>
+          </div>
+        ) }
       </div>
     );
   }
